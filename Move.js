@@ -2,15 +2,21 @@ class Move {
     constructor(type){
         this.type = type
     }
+
+    moveAsString(){
+        return Move.RPS_MOVES[this.type]; 
+    }
+
     static rock = 0;
-    static scissors = 1;
-    static paper = 2;
+    static paper = 1;
+    static scissors = 2;
     static other = 3;
 
     static generateRandomMoveType(){
         return Math.trunc(Math.random()*3);
     }
 
+    static RPS_MOVES = ["Rock", "Paper", "Scissors", "Other"];
     static getMoveTypeFromString(string){
         if (string==="rock") return Move.rock;
         if (string==="scissors") return Move.scissors;
@@ -18,24 +24,27 @@ class Move {
         return Move.other;
     }
 
+    //will return 0 if tie
+    //will return >0 if A wins
+    //will return <0 if B wins
     static determineWinner(moveA, moveB){
         if (moveA.type===moveB.type){
-            return "tie!"
+            return 0;
         }
-        
-        if (moveA.type===Move.other) return "b wins!"
-        if (moveB.type===Move.other) return "a wins!"
+
+        if (moveA.type===Move.other) return -1;
+        if (moveB.type===Move.other) return 1;
 
         if (moveA.type===Move.rock && moveB.type===Move.scissors){
-            return "a wins!"
+            return 1;
         }
         if (moveA.type===Move.scissors && moveB.type===Move.paper){
-            return "a wins!"
+            return 1;
         }
         if (moveA.type===Move.paper && moveB.type===Move.rock){
-            return "a wins!"
+            return 1;
         }
-        return "b wins!"
+        return -1;
     }
 }
 

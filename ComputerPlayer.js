@@ -1,4 +1,5 @@
 let Player = require("./Player.js");
+let Move = require('./Move.js');
 
 class ComputerPlayer extends Player{
     constructor(name="Computer"){

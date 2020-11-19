@@ -1,15 +1,14 @@
 let Move = require("./Move.js");
 let Player = require("./Player.js");
 let ComputerPlayer = require("./ComputerPlayer.js");
+let Game = require('./Game.js');
 
-console.log('Playing a game of Roshambo against the computer.')
-let playerMoveString = getMoveFromString(process.argv[2]);
+let playerMoveString = getMoveFromString(String(process.argv[2]));
 let playerMoveType = Move.getMoveTypeFromString(playerMoveString);
-let player = new Player("Player", playerMoveType);
-let computerPlayer = new ComputerPlayer();
 
-console.log('Player plays ' + playerMoveString + '!');
+let rpsGame = new Game(new Player("Player", playerMoveType), new ComputerPlayer());
 
+rpsGame.playTheGame();
 
 function getMoveFromString(input){ 
     input = input.toLowerCase().trim();
@@ -18,4 +17,3 @@ function getMoveFromString(input){
     }
     return null;
 }
-
